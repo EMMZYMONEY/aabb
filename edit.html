@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Edit – ABILINCOLN ENTERPRISES</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    #login-box { max-width:480px; margin:8rem auto 4rem; padding:2.5rem; background:white; border-radius:1rem; box-shadow:0 10px 30px rgba(0,0,0,0.15); text-align:center; }
+    #admin-content { display:none; max-width:900px; margin:0 auto 6rem; }
+    .form-group { margin-bottom:1.6rem; }
+    label { display:block; margin-bottom:0.6rem; font-weight:600; color:#374151; }
+    input[type="text"], input[type="number"], input[type="password"] {
+      width:100%; padding:0.9rem 1.2rem; border:1px solid #d1d5db; border-radius:0.75rem; font-size:1rem;
+    }
+    input:focus { outline:none; border-color:#16a34a; box-shadow:0 0 0 3px rgba(22,163,74,0.15); }
+    .btn { background:#16a34a; color:white; border:none; padding:1rem 2.5rem; border-radius:0.75rem; font-size:1.1rem; font-weight:600; cursor:pointer; }
+    .btn:hover { background:#15803d; }
+    .warning { background:#fef3c7; color:#92400e; padding:1rem 1.5rem; border-radius:0.75rem; margin:1.5rem 0; font-size:0.95rem; }
+    .status { margin-top:1rem; font-weight:500; }
+    .success { color:#16a34a; }
+    .error   { color:#dc2626; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="logo">
+        <div class="logo-circle">A</div>
+        <span style="font-weight:700; font-size:1.4rem;">ABILINCOLN</span>
+      </div>
+      <div>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="request.html">Request</a>
+        <a href="payment.html">Payment</a>
+      </div>
+      <a href="https://wa.me/2347032623229" class="btn-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
+  </nav>
+
+  <div id="login-box">
+    <h2>Admin Panel</h2>
+    <p style="margin:1.5rem 0 2rem; color:#4b5563;">Enter password to edit prices & account details</p>
+    <input type="password" id="admin-pass" placeholder="Password" />
+    <button class="btn" onclick="checkLogin()" style="margin-top:1.5rem;">Login</button>
+  </div>
+
+  <div id="admin-content" class="container">
+    <div class="warning">
+      <strong>Note:</strong> Changes here update the website for <strong>all visitors</strong> (via backend).<br>
+      Only share the password with trusted people.
+    </div>
+
+    <h3>Bank Account Details</h3>
+    <div class="form-group">
+      <label>Bank Name</label>
+      <input type="text" id="bank_name" />
+    </div>
+    <div class="form-group">
+      <label>Account Number</label>
+      <input type="text" id="bank_account" />
+    </div>
+    <div class="form-group">
+      <label>Account Name</label>
+      <input type="text" id="account_holder" />
+    </div>
+
+    <h3 style="margin-top:2.5rem;">Service Prices (₦)</h3>
+    <div class="form-group"><label>Vehicle Documents Processing</label><input type="number" id="price_vdp" /></div>
+    <div class="form-group"><label>Fancy Plate Number (starting)</label><input type="number" id="price_fancy" /></div>
+    <div class="form-group"><label>Dealer Number</label><input type="number" id="price_dealer" /></div>
+    <div class="form-group"><label>Driver’s Licence</label><input type="number" id="price_dl" /></div>
+    <div class="form-group"><label>International Driver’s Licence</label><input type="number" id="price_idl" /></div>
+    <div class="form-group"><label>Plate Number Replacement</label><input type="number" id="price_plate_rep" /></div>
+    <div class="form-group"><label>Tinted Permit</label><input type="number" id="price_tinted" /></div>
+    <div class="form-group"><label>ECMR</label><input type="number" id="price_ecmr" /></div>
+
+    <button class="btn" onclick="saveAllChanges()" style="margin-top:2.5rem; width:100%; max-width:400px;">
+      <i class="fas fa-save"></i> Save Changes (Site-wide)
+    </button>
+
+    <div id="status-msg" class="status"></div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 ABILINCOLN ENTERPRISES • Admin Panel</p>
+    </div>
+  </footer>
+
+  <script>
+    const API_URL = "https://abilincoln-backend.onrender.com";      // ← your actual Render URL
+    const ADMIN_PASSWORD = "Emmanuel@8852";                        // Must match backend password
+
+    async function checkLogin() {
+      const input = document.getElementById("admin-pass").value.trim();
+      if (input !== ADMIN_PASSWORD) {
+        alert("Incorrect password.");
+        return;
+      }
+
+      document.getElementById("login-box").style.display = "none";
+      document.getElementById("admin-content").style.display = "block";
+
+      await loadCurrentSettings();
+    }
+
+    async function loadCurrentSettings() {
+      try {
+        const res = await fetch(`${API_URL}/api/settings`);
+        if (!res.ok) throw new Error("Failed to load");
+
+        const data = await res.json();
+
+        // Bank
+        document.getElementById("bank_name").value     = data.bank_name     || "Opay";
+        document.getElementById("bank_account").value  = data.bank_account  || "8066278547";
+        document.getElementById("account_holder").value = data.account_holder || "Asipa Iyabo Bunmi";
+
+        // Prices
+        const p = data.prices || {};
+        document.getElementById("price_vdp").value      = p["Vehicle Documents Processing"] || 25000;
+        document.getElementById("price_fancy").value    = p["Fancy Plate Number"] || 150000;
+        document.getElementById("price_dealer").value   = p["Dealer Number"] || 85000;
+        document.getElementById("price_dl").value       = p["Driver Licence"] || 15000;
+        document.getElementById("price_idl").value      = p["International Driver’s Licence"] || 45000;
+        document.getElementById("price_plate_rep").value = p["Plate Number Replacement"] || 18000;
+        document.getElementById("price_tinted").value   = p["Tinted Permit (Tinted Glass Permit)"] || 35000;
+        document.getElementById("price_ecmr").value     = p["ECMR (Electronic Central Motor Registry)"] || 12000;
+
+      } catch (err) {
+        console.error(err);
+        alert("Could not load current settings. Using defaults.");
+      }
+    }
+
+    async function saveAllChanges() {
+      const status = document.getElementById("status-msg");
+      status.textContent = "Saving...";
+      status.className = "status";
+
+      try {
+        const payload = {
+          password: ADMIN_PASSWORD,
+          bank_name:     document.getElementById("bank_name").value.trim(),
+          bank_account:  document.getElementById("bank_account").value.trim(),
+          account_holder: document.getElementById("account_holder").value.trim(),
+          prices: {
+            "Vehicle Documents Processing": Number(document.getElementById("price_vdp").value) || 25000,
+            "Fancy Plate Number": Number(document.getElementById("price_fancy").value) || 150000,
+            "Dealer Number": Number(document.getElementById("price_dealer").value) || 85000,
+            "Driver Licence": Number(document.getElementById("price_dl").value) || 15000,
+            "International Driver’s Licence": Number(document.getElementById("price_idl").value) || 45000,
+            "Plate Number Replacement": Number(document.getElementById("price_plate_rep").value) || 18000,
+            "Tinted Permit (Tinted Glass Permit)": Number(document.getElementById("price_tinted").value) || 35000,
+            "ECMR (Electronic Central Motor Registry)": Number(document.getElementById("price_ecmr").value) || 12000
+          }
+        };
+
+        const res = await fetch(`${API_URL}/api/settings`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await res.json();
+
+        if (result.success) {
+          status.textContent = "✓ Changes saved successfully (visible to everyone)";
+          status.className = "status success";
+        } else {
+          throw new Error(result.error || "Save failed");
+        }
+      } catch (err) {
+        console.error(err);
+        status.textContent = "✗ Failed to save: " + (err.message || "Check connection");
+        status.className = "status error";
+      }
+    }
+  </script>
+</body>
+</html>

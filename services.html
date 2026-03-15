@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Services – ABILINCOLN ENTERPRISES</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .service-price {
+      background: #ecfdf5;
+      color: #065f46;
+      font-weight: 700;
+      padding: 0.6rem 1.2rem;
+      border-radius: 9999px;
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-size: 1.15rem;
+    }
+    .card-inner {
+      transition: transform 0.25s ease;
+    }
+    .card:hover .card-inner {
+      transform: translateY(-8px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <div class="logo">
+        <div class="logo-circle">A</div>
+        <span style="font-weight:700; font-size:1.4rem;">ABILINCOLN</span>
+      </div>
+      <div>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="request.html">Request</a>
+        <a href="payment.html">Payment</a>
+      </div>
+      <a href="https://wa.me/2347032623229?text=Hello%20I%20want%20information%20about%20your%20services" class="btn-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
+  </nav>
+
+  <!-- Services Section -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center" style="max-width: 800px; margin: 0 auto 3.5rem;">
+        <h2 style="margin-bottom: 1rem;">Our Vehicle Document Services</h2>
+        <p style="font-size: 1.15rem; color: #4b5563; line-height: 1.6;">
+          Click on any service below to start your application or see pricing.<br>
+          All prices shown are starting amounts — final cost may vary based on your details.
+        </p>
+      </div>
+
+      <div class="grid-3">
+
+        <!-- 1. Vehicle Documents Processing → Form -->
+        <div class="card" onclick="window.location.href='vehicleregistration.html'" style="cursor: pointer;">
+          <div class="card-inner">
+            <div class="emoji-big">📋</div>
+            <h3>Vehicle Documents Processing</h3>
+            <p>Complete handling of registration, ownership transfer, etc.</p>
+            <div class="service-price">₦25,000</div>
+          </div>
+        </div>
+
+        <!-- 2. Fancy Plate Number → Direct payment -->
+        <div class="card" onclick="goToPayment('Fancy Plate Number', '150000-450000')" style="cursor: pointer;">
+          <div class="card-inner">
+            <div class="emoji-big">🔢</div>
+            <h3>Fancy Plate Number</h3>
+            <p>Custom / premium / special number plates – official process.</p>
+            <div class="service-price">₦150,000 – ₦450,000</div>
+          </div>
+        </div>
+
+        <!-- 3. Dealer Number → Direct -->
+        <div class="card" onclick="goToPayment('Dealer Number', 85000)" style="cursor: pointer;">
+          <div class="card-inner">
+            <div class="emoji-big">🏷️</div>
+            <h3>Dealer Numbers</h3>
+            <p>Official dealer plate registration for businesses.</p>
+            <div class="service-price">₦85,000</div>
+          </div>
+        </div>
+
+        <!-- 4. Driver’s Licence → National form -->
+        <div class="card" onclick="window.location.href='nationaldriverlicence.html'" style="cursor: pointer;">
+          <div class="card-inner">
+            <div class="emoji-big">🪪</div>
+            <h3>Driver’s Licence</h3>
+            <p>New, renewal, replacement – Nigerian national licence.</p>
+            <div class="service-price">₦15,000</div>
+          </div>
+        </div>
+
+        <!-- 5. International Driver’s Licence → Form -->
+        <div class="card" onclick="window.location.href='internationaldriverlicense.html'" style="cursor: pointer;">
+          <div class="card-inner">
+            <div class="emoji-big">🌍</div>
+            <h3>International Driver’s Licence</h3>
+            <p>Valid international driving permit – fast & legal.</p>
+            <div class="service-price">₦45,000</div>
+          </div>
+        </div>
+
+        <!-- 6. Plate Number Replacement → Direct -->
+        <div class="card" onclick="goToPayment('Plate Number Replacement', 18000)" style="cursor: pointer;">
+          <div class="card-inner">
+            <div class="emoji-big">🔄</div>
+            <h3>Plate Number Replacement</h3>
+            <p>Replace lost, damaged, faded or stolen plates.</p>
+            <div class="service-price">₦18,000</div>
+          </div>
+        </div>
+
+        <!-- 7. Tinted Permit → Direct -->
+        <div class="card" onclick="goToPayment('Tinted Permit (Tinted Glass Permit)', 35000)" style="cursor: pointer;">
+          <div class="card-inner">
+            <div class="emoji-big">🪟</div>
+            <h3>Tinted Permit</h3>
+            <p>Legal tinted glass permit via POSSAP / compliant.</p>
+            <div class="service-price">₦35,000</div>
+          </div>
+        </div>
+
+        <!-- 8. ECMR → Direct -->
+        <div class="card" onclick="goToPayment('ECMR (Electronic Central Motor Registry)', 12000)" style="cursor: pointer;">
+          <div class="card-inner">
+            <div class="emoji-big">📱</div>
+            <h3>ECMR</h3>
+            <p>Electronic Central Motor Registry / digital certificate.</p>
+            <div class="service-price">₦12,000</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-center" style="margin-top: 3.5rem; font-size: 1.1rem; color: #4b5563;">
+        Need a different service or have questions?<br>
+        <a href="https://wa.me/2347032623229?text=Hello%20I%20need%20a%20custom%20service%20quote" target="_blank" style="color: #16a34a; font-weight: 600;">
+          Contact us on WhatsApp for personalized assistance
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 ABILINCOLN ENTERPRISES • +234 703 262 3229 • Reliable & CAC Registered</p>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/2347032623229?text=Hello%20from%20the%20services%20page" class="floating-whatsapp" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Scripts -->
+  <script>
+    const API_URL = "https://abilincoln-backend.onrender.com";
+
+    // DOM references for price elements (0-based index matches grid order)
+    const priceElements = {
+      "Vehicle Documents Processing": document.querySelectorAll('.service-price')[0],
+      "Fancy Plate Number": document.querySelectorAll('.service-price')[1],
+      "Dealer Number": document.querySelectorAll('.service-price')[2],
+      "Driver Licence": document.querySelectorAll('.service-price')[3],
+      "International Driver’s Licence": document.querySelectorAll('.service-price')[4],
+      "Plate Number Replacement": document.querySelectorAll('.service-price')[5],
+      "Tinted Permit (Tinted Glass Permit)": document.querySelectorAll('.service-price')[6],
+      "ECMR (Electronic Central Motor Registry)": document.querySelectorAll('.service-price')[7]
+    };
+
+    async function loadAndUpdatePrices() {
+      try {
+        const response = await fetch(`${API_URL}/api/settings`);
+        if (!response.ok) throw new Error("Backend error");
+
+        const settings = await response.json();
+        const prices = settings.prices || {};
+
+        Object.keys(priceElements).forEach(service => {
+          const elem = priceElements[service];
+          if (elem && prices[service] !== undefined) {
+            let displayPrice = prices[service];
+            if (service === "Fancy Plate Number") {
+              displayPrice = `${displayPrice.toLocaleString()} – ${(displayPrice * 3).toLocaleString()}`;
+            } else {
+              displayPrice = displayPrice.toLocaleString();
+            }
+            elem.textContent = `₦${displayPrice}`;
+          }
+        });
+
+        return settings.prices;
+      } catch (err) {
+        console.error("Could not load prices:", err);
+        return null;
+      }
+    }
+
+    async function goToPayment(service, fallbackPrice) {
+      const prices = await loadAndUpdatePrices() || {};
+      let price = prices[service] || fallbackPrice;
+
+      let priceParam = price;
+      if (service === "Fancy Plate Number") {
+        priceParam = "150000-450000";
+      }
+
+      window.location.href = `payment.html?service=${encodeURIComponent(service)}&price=${encodeURIComponent(priceParam)}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadAndUpdatePrices();
+    });
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

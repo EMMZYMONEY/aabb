@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vehicle Registration – ABILINCOLN ENTERPRISES</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .form-container { max-width: 700px; margin: 0 auto; background: #fff; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    input, textarea { width: 100%; padding: 14px; margin-bottom: 1.2rem; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 1rem; }
+    label { font-weight: 600; display: block; margin-bottom: 6px; color: #374151; }
+    .submit-btn { background: #16a34a; color: white; padding: 16px 32px; font-size: 1.1rem; border: none; border-radius: 9999px; cursor: pointer; width: 100%; }
+    .submit-btn:disabled { background: #9ca3af; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation (copy from your services.html) -->
+  <nav>
+    <div class="container">
+      <div class="logo">
+        <div class="logo-circle">A</div>
+        <span style="font-weight:700; font-size:1.4rem;">ABILINCOLN</span>
+      </div>
+      <div>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="request.html">Request</a>
+        <a href="payment.html">Payment</a>
+      </div>
+      <a href="https://wa.me/2347032623229?text=Hello%20I%20want%20information%20about%20your%20services" class="btn-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+      <div class="form-container">
+        <h2 style="text-align:center; margin-bottom:1.5rem;">Vehicle Registration Form</h2>
+        <p style="text-align:center; color:#4b5563;">Fill in your details below. We'll process and redirect you to payment.</p>
+
+        <form id="vehicleForm">
+          <input type="hidden" name="service" value="Vehicle Registration">
+
+          <label>NAME</label>
+          <input type="text" name="name" required>
+
+          <label>ADDRESS</label>
+          <textarea name="address" rows="3" required></textarea>
+
+          <label>VEHICLE MAKE</label>
+          <input type="text" name="vehicle_make" required>
+
+          <label>VEHICLE TYPE</label>
+          <input type="text" name="vehicle_type" required>
+
+          <label>CHASSIS NO</label>
+          <input type="text" name="chassis_no" required>
+
+          <label>ENGINE NO</label>
+          <input type="text" name="engine_no" required>
+
+          <label>VEHICLE COLOUR</label>
+          <input type="text" name="vehicle_colour" required>
+
+          <label>OWNER'S PHONE NO</label>
+          <input type="tel" name="phone" required>
+
+          <button type="submit" class="submit-btn" id="submitBtn">Submit & Proceed to Payment</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 ABILINCOLN ENTERPRISES • +234 703 262 3229 • Reliable & CAC Registered</p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/2347032623229?text=Hello%20from%20Vehicle%20Registration%20form" class="floating-whatsapp" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    const API_URL = "https://abilincoln-backend.onrender.com";
+    const SERVICE_NAME = "Vehicle Documents Processing";  // Matches your backend key (adjust if needed)
+    const FALLBACK_PRICE = 25000;
+
+    async function getCurrentPrice() {
+      try {
+        const res = await fetch(`${API_URL}/api/settings`);
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        return data.prices[SERVICE_NAME] || FALLBACK_PRICE;
+      } catch (e) {
+        console.error("Price fetch failed");
+        return FALLBACK_PRICE;
+      }
+    }
+
+    document.getElementById("vehicleForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById("submitBtn");
+      btn.disabled = true;
+      btn.textContent = "Submitting...";
+
+      const formData = new FormData(this);
+
+      try {
+        const response = await fetch("https://formspree.io/f/mbdzawvj", {
+          method: "POST",
+          body: formData,
+          headers: { "Accept": "application/json" }
+        });
+
+        if (response.ok) {
+          const price = await getCurrentPrice();
+          window.location.href = `payment.html?service=${encodeURIComponent("Vehicle Documents Processing")}&price=${encodeURIComponent(price)}`;
+        } else {
+          alert("Submission failed. Please try again or contact us on WhatsApp.");
+        }
+      } catch (err) {
+        alert("Network error. Please check your connection.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Submit & Proceed to Payment";
+      }
+    });
+  </script>
+</body>
+</html>

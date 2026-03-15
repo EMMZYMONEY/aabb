@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Submit Request – ABILINCOLN ENTERPRISES</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .form-note {
+      background: #f0fdf4;
+      border-left: 4px solid #16a34a;
+      padding: 1.2rem 1.5rem;
+      border-radius: 0.5rem;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+      color: #166534;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <div class="logo">
+        <div class="logo-circle">A</div>
+        <span style="font-weight:700; font-size:1.4rem;">ABILINCOLN</span>
+      </div>
+      <div>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="request.html">Request</a>
+        <a href="payment.html">Payment</a>
+      </div>
+      <a href="https://wa.me/2347032623229?text=Hello%20I%20want%20to%20submit%20a%20request" class="btn-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
+  </nav>
+
+  <!-- Request Form Section -->
+  <section class="section" style="background: #ffffff;">
+    <div class="container">
+      <div class="text-center" style="max-width: 700px; margin: 0 auto 3rem;">
+        <h2 style="margin-bottom: 1rem;">Submit Your Service Request</h2>
+        <p style="font-size: 1.15rem; color: #4b5563;">
+          Fill in the details below. We'll receive your request via email and contact you immediately on WhatsApp to confirm next steps and any required documents.
+        </p>
+      </div>
+
+      <div class="form-container">
+        <form id="service-form">
+          <div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div>
+              <label for="name">Full Name <span style="color:#ef4444;">*</span></label>
+              <input type="text" id="name" placeholder="Your full name" required>
+            </div>
+            <div>
+              <label for="phone">Phone Number (WhatsApp preferred) <span style="color:#ef4444;">*</span></label>
+              <input type="tel" id="phone" placeholder="+234 80x xxx xxxx" value="+234" required>
+            </div>
+          </div>
+
+          <div>
+            <label for="email">Email Address <span style="color:#ef4444;">*</span></label>
+            <input type="email" id="email" placeholder="yourname@example.com" required>
+          </div>
+
+          <div>
+            <label for="service">Select Service <span style="color:#ef4444;">*</span></label>
+            <select id="service" required>
+              <option value="">-- Choose the service you need --</option>
+              <option>Vehicle Documents Processing</option>
+              <option>Fancy Plate Number</option>
+              <option>Dealer Number</option>
+              <option>Driver Licence</option>
+              <option>International Driver’s Licence</option>
+              <option>Plate Number Replacement</option>
+              <option>Tinted Permit (Tinted Glass Permit)</option>
+              <option>ECMR (Electronic Central Motor Registry)</option>
+              <option>Other (please specify in details below)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="message">Additional Details / Requirements</label>
+            <textarea id="message" rows="5" placeholder="e.g. Vehicle type, plate number preference, urgency, any supporting documents you already have, etc..."></textarea>
+          </div>
+
+          <div class="form-note">
+            <strong>Note:</strong> After submission, you'll get a confirmation alert. We'll reply via WhatsApp (usually within minutes) to guide you on next steps, required documents, and payment if applicable.
+          </div>
+
+          <button type="submit" class="btn-submit">
+            <i class="fas fa-paper-plane"></i> Submit Request
+          </button>
+        </form>
+      </div>
+
+      <div class="text-center" style="margin-top: 2.5rem; font-size: 0.95rem; color: #6b7280;">
+        Prefer to talk directly? <a href="https://wa.me/2347032623229?text=Hello%20I%20filled%20the%20request%20form%20on%20your%20website" target="_blank" style="color:#16a34a; font-weight:600;">Message us on WhatsApp now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 ABILINCOLN ENTERPRISES • +234 703 262 3229 • Reliable & CAC Registered</p>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/2347032623229?text=Hello%20from%20the%20request%20page" class="floating-whatsapp" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="script.js"></script>
+
+  <!-- EmailJS Initialization Reminder -->
+  <!-- 
+    Make sure to replace the placeholders in js/script.js with your actual EmailJS credentials:
+    - YOUR_EMAILJS_USER_ID
+    - YOUR_SERVICE_ID
+    - YOUR_TEMPLATE_ID
+  -->
+
+</body>
+</html>

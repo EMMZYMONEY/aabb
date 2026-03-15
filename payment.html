@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Make Payment – ABILINCOLN ENTERPRISES</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .payment-summary {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 600px;
+      text-align: center;
+    }
+    .payment-summary h3 {
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+    }
+    .amount {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #10b981;
+      margin: 1rem 0;
+    }
+    .bank-details {
+      background: rgba(0,0,0,0.15);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      margin: 2rem 0;
+      font-size: 1.1rem;
+    }
+    .bank-details strong {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <div class="logo">
+        <div class="logo-circle">A</div>
+        <span style="font-weight:700; font-size:1.4rem;">ABILINCOLN</span>
+      </div>
+      <div>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="request.html">Request</a>
+        <a href="payment.html">Payment</a>
+      </div>
+      <a href="https://wa.me/2347032623229?text=Hello%20I%20want%20to%20make%20payment" class="btn-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
+  </nav>
+
+  <!-- Payment Section -->
+  <section class="section" style="background: linear-gradient(135deg, #111827, #1f2937); color: white; min-height: 85vh;">
+    <div class="container text-center">
+      <h2 style="color: white; margin-bottom: 1rem;">Secure Payment</h2>
+      <p style="font-size: 1.15rem; opacity: 0.9; max-width: 700px; margin: 0 auto 2.5rem;">
+        Make direct bank transfer to the account below. After payment, send proof via WhatsApp for instant confirmation and processing.
+      </p>
+
+      <div class="payment-summary" id="payment-summary">
+        <h3 id="service-name">Selected Service</h3>
+        <div class="amount" id="price-display">₦0</div>
+        <p id="price-note" style="font-size: 1rem; opacity: 0.85;"></p>
+      </div>
+
+      <div class="bank-details" id="bank-info">
+        <p><strong>Bank:</strong> <span id="display-bank">Opay</span></p>
+        <p><strong>Account Number:</strong> <span id="display-account">8066278547</span></p>
+        <p><strong>Account Name:</strong> <span id="display-holder">Asipa Iyabo Bunmi</span></p>
+      </div>
+
+      <p style="margin: 2rem 0 1.5rem; font-size: 1.15rem;">
+        After making the transfer, please send the proof of payment (screenshot/receipt) to us on WhatsApp.
+      </p>
+
+      <a id="whatsapp-proof-btn"
+         href="https://wa.me/2347032623229?text=Hello%20ABILINCOLN%20ENTERPRISES%2C%20I%20have%20made%20payment%20for%20my%20service"
+         class="btn-submit" style="display: inline-flex; align-items: center; gap: 0.8rem; padding: 1.2rem 2.8rem; font-size: 1.15rem; text-decoration: none;"
+         target="_blank">
+        <i class="fab fa-whatsapp" style="font-size: 1.6rem;"></i>
+        Send Payment Proof on WhatsApp
+      </a>
+
+      <p style="margin-top: 2.5rem; font-size: 0.95rem; opacity: 0.8;">
+        <i class="fas fa-lock" style="margin-right: 0.5rem;"></i>
+        Your transaction is secure. We only process after confirmation.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 ABILINCOLN ENTERPRISES • +234 703 262 3229 • Reliable & CAC Registered</p>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/2347032623229?text=Hello%20I%20need%20help%20with%20payment" class="floating-whatsapp" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const API_URL = "https://abilincoln-backend.onrender.com";  // ← your real backend URL
+
+    // Get URL parameters from clicking service card
+    const urlParams = new URLSearchParams(window.location.search);
+    const service = urlParams.get('service') || 'Selected Service';
+    let price     = urlParams.get('price')   || '0';
+
+    // Format price display
+    let priceText = '';
+    let priceNote = '';
+
+    if (price === '150000-450000') {
+      priceText = '₦150,000 – ₦450,000';
+      priceNote = '(depending on chosen number)';
+    } else {
+      const numPrice = Number(price);
+      priceText = isNaN(numPrice) ? '₦—' : `₦${numPrice.toLocaleString()}`;
+    }
+
+    // Update service & price on screen
+    document.getElementById('service-name').textContent = service;
+    document.getElementById('price-display').textContent = priceText;
+    if (priceNote) {
+      document.getElementById('price-note').textContent = priceNote;
+    }
+
+    // ───────────────────────────────────────────────
+    // Load dynamic bank details from backend
+    // ───────────────────────────────────────────────
+    try {
+      const response = await fetch(`${API_URL}/api/settings`);
+      
+      if (!response.ok) {
+        throw new Error(`Backend responded with ${response.status}`);
+      }
+
+      const settings = await response.json();
+
+      // Update bank details
+      document.getElementById('display-bank').textContent   = settings.bank_name     || 'Opay';
+      document.getElementById('display-account').textContent = settings.bank_account  || '8066278547';
+      document.getElementById('display-holder').textContent  = settings.account_holder || 'Asipa Iyabo Bunmi';
+
+    } catch (error) {
+      console.error("Failed to load settings from backend:", error);
+
+      // Fallback to hardcoded values if backend fails
+      document.getElementById('display-bank').textContent   = 'Opay';
+      document.getElementById('display-account').textContent = '8066278547';
+      document.getElementById('display-holder').textContent  = 'Asipa Iyabo Bunmi';
+    }
+
+    // Pre-fill WhatsApp message with selected service
+    const waMessage = `Hello ABILINCOLN ENTERPRISES, I have made payment for ${encodeURIComponent(service)}. Please confirm.`;
+    const waLink = `https://wa.me/2347032623229?text=${waMessage}`;
+    document.getElementById('whatsapp-proof-btn').href = waLink;
+  });
+</script>>
+
+  <script src="script.js"></script>
+</body>
+</html>
