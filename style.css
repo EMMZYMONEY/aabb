@@ -6,17 +6,24 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background: #f9fafb;
   color: #1f2937;
   line-height: 1.6;
+  min-height: 100vh;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1.25rem;
+  width: 100%;
 }
 
 .text-center {
@@ -25,8 +32,14 @@ body {
 
 .grid-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.75rem;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem;
 }
 
 nav {
@@ -34,14 +47,14 @@ nav {
   box-shadow: 0 2px 10px rgba(0,0,0,0.08);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
 }
 
 nav .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 1.5rem;
+  padding: 1.125rem 0;
 }
 
 .logo {
@@ -67,8 +80,9 @@ nav a {
   text-decoration: none;
   color: #374151;
   font-weight: 500;
-  margin-left: 2rem;
+  margin-left: 1.75rem;
   transition: color 0.2s;
+  white-space: nowrap;
 }
 
 nav a:hover {
@@ -78,9 +92,9 @@ nav a:hover {
 .btn-whatsapp {
   background: #25D366;
   color: white;
-  padding: 0.75rem 1.5rem;
+  padding: 0.7rem 1.4rem;
   border-radius: 9999px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   font-weight: 500;
@@ -97,11 +111,11 @@ nav a:hover {
               url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80') center/cover no-repeat;
   color: white;
   text-align: center;
-  padding: 8rem 1.5rem 6rem;
+  padding: 9rem 1rem 7rem;
 }
 
 .hero .badge {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.18);
   backdrop-filter: blur(6px);
   padding: 0.5rem 1.25rem;
   border-radius: 9999px;
@@ -113,14 +127,14 @@ nav a:hover {
 }
 
 h1 {
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 6vw, 3.8rem);
   margin-bottom: 1.5rem;
   line-height: 1.1;
 }
 
 .hero p {
-  font-size: 1.4rem;
-  max-width: 700px;
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
+  max-width: 720px;
   margin: 0 auto 2.5rem;
 }
 
@@ -131,9 +145,8 @@ h1 {
   border-radius: 9999px;
   font-weight: 600;
   text-decoration: none;
-  margin: 0.5rem;
   display: inline-block;
-  transition: all 0.2s;
+  transition: all 0.22s;
 }
 
 .btn-primary:hover {
@@ -141,63 +154,50 @@ h1 {
   transform: translateY(-2px);
 }
 
-.btn-outline {
-  border: 2px solid white;
-  color: white;
-}
-
-.btn-outline:hover {
-  background: rgba(255,255,255,0.15);
-}
-
 .section {
-  padding: 5rem 1.5rem;
+  padding: 6rem 1rem;
 }
 
 h2 {
-  font-size: 2.5rem;
-  text-align: center;
-  margin-bottom: 1rem;
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  margin-bottom: 1.25rem;
 }
 
 h3 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.75rem;
-  margin-top: 3rem;
+  font-size: 1.75rem;
+  margin-bottom: 1.25rem;
 }
 
 .card {
   background: white;
-  border-radius: 1.5rem;
-  padding: 2rem;
+  border-radius: 1.25rem;
+  padding: 2rem 1.5rem;
   box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: all 0.3s ease;
   text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
 .emoji-big {
-  font-size: 4.5rem;
+  font-size: 4.2rem;
   margin-bottom: 1.25rem;
 }
 
 .form-container {
   background: white;
-  border-radius: 1.5rem;
+  border-radius: 1.25rem;
   padding: 2.5rem;
   box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-  max-width: 650px;
+  max-width: 720px;
   margin: 0 auto;
+  width: 100%;
 }
 
 input, select, textarea {
@@ -207,6 +207,7 @@ input, select, textarea {
   border: 1px solid #d1d5db;
   border-radius: 0.75rem;
   font-size: 1rem;
+  transition: all 0.2s;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -221,7 +222,7 @@ input:focus, select:focus, textarea:focus {
   border: none;
   width: 100%;
   padding: 1.25rem;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 600;
   border-radius: 0.75rem;
   cursor: pointer;
@@ -234,58 +235,161 @@ input:focus, select:focus, textarea:focus {
 
 .floating-whatsapp {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 24px;
+  right: 24px;
   background: #25D366;
   color: white;
-  width: 68px;
-  height: 68px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.2rem;
+  font-size: 2rem;
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  z-index: 999;
+  z-index: 9999;
   text-decoration: none;
-  animation: pulse 2s infinite;
+  transition: transform 0.2s;
 }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.08); }
+.floating-whatsapp:hover {
+  transform: scale(1.1);
 }
 
 footer {
   background: #111827;
   color: #9ca3af;
-  padding: 4rem 1.5rem 2rem;
+  padding: 4rem 1rem 2rem;
   text-align: center;
+  margin-top: 4rem;
 }
 
-footer a {
-  color: #9ca3af;
-  text-decoration: none;
+/* ────────────────────────────────────────────────
+   RESPONSIVE DESIGN – MEDIA QUERIES
+───────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 5rem 1rem;
+  }
+  
+  .grid-3 {
+    gap: 1.5rem;
+  }
+  
+  h1 {
+    font-size: clamp(2.8rem, 7vw, 3.4rem);
+  }
 }
 
-footer a:hover {
-  color: #10b981;
-}
-
-/* Media Queries */
 @media (max-width: 768px) {
-  h1 { font-size: 2.8rem; }
-  nav .container { flex-direction: column; gap: 1rem; padding: 1rem; }
-  nav a { margin: 0 1rem; font-size: 0.95rem; }
-  .grid-2 { grid-template-columns: 1fr; gap: 1rem; }
-  .hero { padding: 6rem 1rem 4rem; }
-  .hero p { font-size: 1.2rem; }
+  nav .container {
+    flex-wrap: wrap;
+    padding: 1rem;
+  }
+
+  nav a {
+    margin: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .hero {
+    padding: 7rem 1rem 5rem;
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .card {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .emoji-big {
+    font-size: 3.8rem;
+  }
+
+  .form-container {
+    padding: 2rem 1.5rem;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 5.5vw, 2.3rem);
+  }
+}
+
+@media (max-width: 640px) {
+  nav .container {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  nav a {
+    margin: 0.4rem 0;
+  }
+
+  .btn-whatsapp {
+    width: 100%;
+    justify-content: center;
+    padding: 0.9rem;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .floating-whatsapp {
+    bottom: 20px;
+    right: 20px;
+    width: 58px;
+    height: 58px;
+    font-size: 1.8rem;
+  }
+
+  .section {
+    padding: 4.5rem 1rem;
+  }
 }
 
 @media (max-width: 480px) {
-  h2 { font-size: 2rem; }
-  .btn-primary, .btn-submit {
-    padding: 0.9rem 1.8rem;
+  .container {
+    padding: 0 1rem;
+  }
+
+  .section {
+    padding: 4rem 0;
+  }
+
+  .hero {
+    padding: 6rem 1rem 4rem;
+  }
+
+  .btn-primary,
+  .btn-submit {
+    padding: 0.9rem 1.6rem;
     font-size: 1rem;
+  }
+
+  input,
+  select,
+  textarea {
+    padding: 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .emoji-big {
+    font-size: 3.2rem;
+  }
+
+  .card {
+    padding: 1.5rem 1rem;
   }
 }
